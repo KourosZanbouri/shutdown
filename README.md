@@ -120,3 +120,13 @@ Get-WinEvent -FilterHashtable @{LogName='System'; ID=1074, 6006, 6008, 41, 6005,
   Sort-Object TimeCreated -Descending | 
   Format-Table TimeCreated, ID, Message -AutoSize -Wrap
 ```
+#### Blue Screen of Death
+
+Here's the command to find those `BugCheck` **(Blue Screen of Death)** error codes.
+
+This command searches for **Event ID 1001** and formats the output so you can clearly see the error code.
+
+```
+Get-WinEvent -ProviderName "Microsoft-Windows-WER-SystemErrorReporting" -FilterXPath "*[System[EventID=1001]]" -MaxEvents 5 | 
+  Format-List TimeCreated, Message
+```
